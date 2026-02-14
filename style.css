@@ -1,0 +1,363 @@
+/* style.css — strictly separate, no inline, no style tags */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background: linear-gradient(145deg, #300 0%, #4a1a2c 40%, #2d1b3a 100%);
+  min-height: 100vh;
+  font-family: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 1rem 2rem 4rem;
+  color: #fdeff2;
+  line-height: 1.6;
+  position: relative;
+  overflow-x: hidden;
+}
+
+/* ===== futuristic love particles ===== */
+.particle-field {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.particle {
+  position: absolute;
+  width: calc(1px * var(--size, 8));
+  height: calc(1px * var(--size, 8));
+  background: rgba(255, 200, 220, 0.25);
+  border-radius: 50%;
+  box-shadow: 0 0 20px 6px rgba(255, 182, 193, 0.6), 0 0 40px 10px rgba(230, 150, 200, 0.3);
+  left: var(--left, 50%);
+  bottom: -10%;
+  animation: floatUp 16s infinite ease-in-out;
+  animation-delay: var(--delay, 0s);
+  filter: blur(1px);
+}
+
+@keyframes floatUp {
+  0% { transform: translateY(0) scale(0.8); opacity: 0.4; }
+  50% { opacity: 0.9; transform: translateY(-40vh) scale(1.2); }
+  100% { transform: translateY(-90vh) scale(0.6); opacity: 0; }
+}
+
+/* ===== soft cinematic opener ===== */
+.cinema {
+  min-height: 90vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  position: relative;
+  width: 100%;
+  margin-bottom: 2rem;
+}
+
+.cinema-content {
+  position: relative;
+  z-index: 10;
+  background: rgba(20, 5, 10, 0.2);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  padding: 3rem 4rem;
+  border-radius: 80px 20px 80px 20px;
+  border: 1px solid rgba(255, 200, 220, 0.3);
+  box-shadow: 0 0 70px rgba(255, 130, 180, 0.3), inset 0 0 30px #ffb6c180;
+  animation: pulseGlow 6s infinite alternate;
+}
+
+@keyframes pulseGlow {
+  0% { box-shadow: 0 0 40px #fba0c0, inset 0 0 15px #ffb3c6; }
+  100% { box-shadow: 0 0 100px #ff99bb, inset 0 0 40px #ffc0cb; }
+}
+
+.glow-text {
+  font-size: clamp(2.2rem, 8vw, 4.5rem);
+  font-weight: 300;
+  letter-spacing: 4px;
+  background: linear-gradient(135deg, #fff2f5, #fcc2d0, #e9b4ff);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  text-shadow: 0 0 25px #ffa5c3, 0 0 45px #d896ff;
+  margin-bottom: 0.5rem;
+}
+
+.cinema-sub {
+  font-size: 1.2rem;
+  color: #ffdfe6;
+  letter-spacing: 2px;
+  text-shadow: 0 0 15px hotpink;
+}
+
+/* ===== glass cards (glassmorphism + love tones) ===== */
+.glass-card {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 2rem;
+  max-width: 1100px;
+  width: 100%;
+  margin: 4rem 0;
+  padding: 2.5rem 2.8rem;
+  background: rgba(70, 25, 45, 0.25);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+  border-radius: 48px 16px 48px 16px;
+  border: 1px solid rgba(255, 170, 200, 0.4);
+  box-shadow: 0 30px 50px -20px rgba(180, 40, 80, 0.5), 0 0 0 1px rgba(255, 210, 230, 0.2) inset;
+  transition: transform 0.3s ease, box-shadow 0.4s;
+  position: relative;
+  z-index: 5;
+}
+
+.glass-card:hover {
+  transform: scale(1.01);
+  box-shadow: 0 40px 70px -15px #b3446c, 0 0 0 2px #ffbfd7 inset;
+}
+
+.reverse {
+  flex-direction: row-reverse;
+}
+
+/* symbolic images (pure css / light art) */
+.image-symbolic {
+  flex: 1 1 220px;
+  min-width: 200px;
+  height: 220px;
+  border-radius: 40% 60% 40% 60% / 60% 40% 60% 40%;
+  background: radial-gradient(circle at 30% 30%, #ffb6c1, #eba0c0, #d9a0e6);
+  box-shadow: 0 0 60px #ffa0c0, 0 10px 30px #b34e7a inset;
+  transition: all 0.5s;
+  position: relative;
+  overflow: hidden;
+}
+
+/* each image gets a unique overlay representing a theme */
+.hands::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at 70% 40%, #fff6e6 4px, transparent 10px),
+              radial-gradient(circle at 30% 70%, #ffc0cb 6px, transparent 15px),
+              linear-gradient(125deg, transparent 50%, rgba(255,240,245,0.4) 80%);
+  background-blend-mode: overlay;
+  opacity: 0.7;
+}
+.silhouette::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" opacity="0.3"><path d="M30,60 Q45,30 70,40 L68,55 Q50,45 40,65 Z" fill="%23ffeef2"/><circle cx="60" cy="30" r="8" fill="%23ffe2e8"/><circle cx="30" cy="30" r="8" fill="%23ffe2e8"/></svg>');
+  background-size: cover;
+  filter: drop-shadow(0 0 6px hotpink);
+}
+.rose-glow::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at 50% 20%, #ff9fca 10px, #f7b0d0 30px, #d680b0 70px);
+  box-shadow: 0 0 30px #ffa0d0 inset;
+}
+.promise-light::after {
+  content: "✨";
+  font-size: 7rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #ffe7ed;
+  text-shadow: 0 0 40px gold, 0 0 80px #ffb6c1;
+  background: radial-gradient(circle, #ffdab9 0%, #eba0c0 90%);
+  mix-blend-mode: soft-light;
+}
+.open-communication::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(145deg, #fcc2e0, #ffe2f0);
+  clip-path: polygon(20% 20%, 80% 30%, 75% 75%, 25% 80%);
+  opacity: 0.6;
+  box-shadow: 0 0 25px #ffafd0;
+}
+
+/* card text */
+.card-text {
+  flex: 2 1 350px;
+}
+
+.gradient-heading {
+  font-size: 2.2rem;
+  font-weight: 400;
+  margin-bottom: 1.2rem;
+  background: linear-gradient(130deg, #ffdad0, #feb1d5, #dfb5ff);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  text-shadow: 0 0 15px #fcb4d0;
+}
+
+.card-text p {
+  font-size: 1.2rem;
+  color: #faeef2;
+  text-shadow: 0 1px 4px rgba(0,0,0,0.2);
+  background: rgba(30, 10, 15, 0.1);
+  padding: 1rem 1.5rem;
+  border-radius: 32px 8px 32px 8px;
+  border-left: 3px solid #ffafcd;
+}
+
+/* ===== closing romantic section ===== */
+.closing {
+  width: 100%;
+  max-width: 900px;
+  margin: 6rem 0 2rem;
+  padding: 4rem 2rem;
+  text-align: center;
+  background: rgba(80, 35, 60, 0.3);
+  backdrop-filter: blur(15px);
+  -webkit-backdrop-filter: blur(15px);
+  border-radius: 70px 20px 70px 20px;
+  border: 1px solid rgba(255, 200, 220, 0.5);
+  box-shadow: 0 0 120px #ff87b2, inset 0 0 40px #ffbfd0;
+  position: relative;
+  z-index: 10;
+}
+
+.closing-quote {
+  font-size: 2rem;
+  font-weight: 300;
+  color: #ffdfec;
+  text-shadow: 0 0 20px #ffa7c7;
+  margin-bottom: 2.5rem;
+  line-height: 1.4;
+  max-width: 700px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.closing-signature {
+  font-size: 2rem;
+  color: #ffeaee;
+  letter-spacing: 1px;
+  text-shadow: 0 0 30px hotpink;
+}
+
+.signature-name {
+  font-size: 2.6rem;
+  font-weight: 400;
+  background: linear-gradient(135deg, #ffd2e1, #fb9ec7);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  display: inline-block;
+  margin-top: 0.5rem;
+  border-bottom: 2px solid #ffa5c3;
+  padding-bottom: 0.3rem;
+}
+
+.valentine-whisper {
+  margin-top: 2rem;
+  font-size: 1.3rem;
+  color: #ffc1cf;
+  text-transform: uppercase;
+  letter-spacing: 3px;
+  word-spacing: 5px;
+  opacity: 0.9;
+}
+
+/* floating hearts animation */
+.floating-hearts {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: -1;
+}
+
+.heart {
+  position: absolute;
+  bottom: -10%;
+  left: var(--left, 20%);
+  width: 24px;
+  height: 24px;
+  background: #ffb0c9;
+  transform: rotate(45deg);
+  animation: heartFloat 14s infinite ease-in-out;
+  animation-delay: var(--delay, 0s);
+  opacity: 0.15;
+  box-shadow: 0 0 30px #ff89b5, 0 0 60px #ffb6d0;
+}
+
+.heart::before,
+.heart::after {
+  content: '';
+  position: absolute;
+  width: 24px;
+  height: 24px;
+  background: #ffb0c9;
+  border-radius: 50%;
+  box-shadow: inherit;
+}
+
+.heart::before {
+  left: -12px;
+  top: 0;
+}
+
+.heart::after {
+  top: -12px;
+  left: 0;
+}
+
+@keyframes heartFloat {
+  0% { transform: translateY(0) rotate(45deg) scale(0.8); opacity: 0.1; }
+  50% { opacity: 0.5; transform: translateY(-30vh) rotate(45deg) scale(1.3); }
+  100% { transform: translateY(-90vh) rotate(45deg) scale(0.6); opacity: 0; }
+}
+
+/* fade-in scroll effect (pure css) */
+.fade-in {
+  animation: fadeSlide 1.2s ease-out both;
+  animation-timeline: view();
+  animation-range: entry 0% entry 90%;
+}
+@keyframes fadeSlide {
+  from { opacity: 0; transform: translateY(40px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* responsive */
+@media (max-width: 760px) {
+  body { padding: 0.5rem 1rem; }
+  .glass-card { flex-direction: column; padding: 1.8rem; }
+  .reverse { flex-direction: column; }
+  .image-symbolic { width: 100%; height: 200px; }
+  .cinema-content { padding: 2rem 1rem; }
+  .glow-text { font-size: 2.2rem; }
+  .gradient-heading { font-size: 1.8rem; }
+  .closing-quote { font-size: 1.4rem; }
+}
+
+@media (max-width: 480px) {
+  .glass-card { margin: 2rem 0; padding: 1.5rem; }
+  .card-text p { font-size: 1rem; }
+  .signature-name { font-size: 2rem; }
+}
+
+/* tiny extra love */
+.space {
+  height: 20px;
+  width: 100%;
+}
